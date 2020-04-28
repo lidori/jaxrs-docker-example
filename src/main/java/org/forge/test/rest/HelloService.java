@@ -6,12 +6,21 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import java.util.Date;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.ServerAddress;
+import com.mongodb.MongoCredential;
+import com.mongodb.MongoClientOptions;
+import java.util.Arrays;
+
 @Path("/greet")
 public class HelloService {
 
 	@GET
 	@Produces("text/plain")
 	public Response doGet() {
-		return Response.ok("shira method doGet invoked " + new Date()).build();
+		MongoClient mongoClient = new MongoClient("172.30.47.7", 27017);
+		boolean auth = mongoClient.getDB("vachubdb").authenticate("admin", "shiraadmin".toCharArray());
+		return Response.ok("shira method doGet invoked " + auth + ", " + new Date()).build();
 	}
 }
