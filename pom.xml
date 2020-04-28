@@ -42,7 +42,7 @@
     <dependency>
         <groupId>org.mongodb</groupId>
         <artifactId>mongodb-driver-sync</artifactId>
-        <version>${mongodb-driver-sync.version}</version>
+        <version>3.4.1</version>
     </dependency>
   </dependencies>
   <dependencyManagement>
