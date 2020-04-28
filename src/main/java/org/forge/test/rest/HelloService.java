@@ -27,6 +27,7 @@ public class HelloService {
 		mongoClient.getDatabaseNames().forEach(System.out::println);
 		String s = mongoClient.getDatabaseNames().get(0);
 		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
+		System.out.println("database is " + database);
 		database.createCollection("customers");
 		for (String name : database.listCollectionNames()) {
 			System.out.println(name);
