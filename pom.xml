@@ -39,6 +39,11 @@
       <groupId>io.thorntail</groupId>
       <artifactId>jaxrs</artifactId>
     </dependency>
+    <dependency>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+        <version>${mongodb-driver-sync.version}</version>
+    </dependency>
   </dependencies>
   <dependencyManagement>
     <dependencies>
@@ -54,11 +59,6 @@
         <version>${version.thorntail}</version>
         <scope>import</scope>
         <type>pom</type>
-      </dependency>
-      <dependency>
-        <groupId>org.mongodb</groupId>
-        <artifactId>mongodb-driver-sync</artifactId>
-        <version>${mongodb-driver-sync.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
