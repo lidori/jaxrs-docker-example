@@ -25,12 +25,12 @@ public class HelloService {
 		MongoClientURI uri = new MongoClientURI("mongodb://admin:shiraadmin@172.30.47.7:27017");
 		MongoClient mongoClient = new MongoClient(uri);
 		mongoClient.getDatabaseNames().forEach(System.out::println);
-		String s = mongoClient.getDatabaseNames().get(1);
+		String s = mongoClient.getDatabaseNames().get(0);
 		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
-		database.createCollection("customers", null);
+		database.createCollection("customers");
 		for (String name : database.listCollectionNames()) {
 			System.out.println(name);
 		}
-		return Response.ok("shira method doGet invoked " + s + ", " + new Date()).build();
+		return Response.ok("shira 1 method doGet invoked " + s + ", " + new Date()).build();
 	}
 }
