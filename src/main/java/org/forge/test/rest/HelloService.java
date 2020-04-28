@@ -27,8 +27,7 @@ public class HelloService {
 		MongoClient mongoClient = new MongoClient(uri);
 		mongoClient.getDatabaseNames().forEach(System.out::println);
 		String s = mongoClient.getDatabaseNames().get(1);
-		DB database = mongoClient.getDB("myMongoDb");
-		boolean auth = database.authenticate("admin", "shiraadmin".toCharArray());
+		DB database = mongoClient.getDatabase("myMongoDb");
 		database.createCollection("customers", null);
 		database.getCollectionNames().forEach(System.out::println);
 		return Response.ok("shira method doGet invoked " + s + ", " + new Date()).build();
