@@ -19,7 +19,8 @@ public class HelloService {
 	@GET
 	@Produces("text/plain")
 	public Response doGet() {
-		MongoClient mongoClient = new MongoClient("172.30.47.7", 27017);
+		MongoClientURI uri = new MongoClientURI("mongodb://admin:shiraadmin@172.30.47.7:27017");
+		MongoClient mongoClient = new MongoClient(uri);
 		mongoClient.getDatabaseNames().forEach(System.out::println);
 		String s = mongoClient.getDatabaseNames().get(0);
 		return Response.ok("shira method doGet invoked " + s + ", " + new Date()).build();
