@@ -56,9 +56,11 @@
         <type>pom</type>
       </dependency>
       <dependency>
-          <groupId>org.mongodb</groupId>
-          <artifactId>mongo-java-driver</artifactId>
-          <version>3.4.1</version>
+        <groupId>org.mongodb</groupId>
+        <artifactId>mongodb-driver-sync</artifactId>
+        <version>${mongodb-driver-sync.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
       </dependency>
     </dependencies>
   </dependencyManagement>
