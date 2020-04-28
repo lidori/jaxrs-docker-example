@@ -26,9 +26,10 @@ public class HelloService {
 		MongoClientURI uri = new MongoClientURI("mongodb://admin:shiraadmin@172.30.47.7:27017");
 		MongoClient mongoClient = new MongoClient(uri);
 		mongoClient.getDatabaseNames().forEach(System.out::println);
-		String s = mongoClient.getDatabaseNames().get(0);
+		String s = mongoClient.getDatabaseNames().get(1);
 		DB database = mongoClient.getDB("myMongoDb");
-		//database.createCollection("customers", null);
+		boolean auth = database.authenticate("admin", "shiraadmin".toCharArray());
+		database.createCollection("customers", null);
 		database.getCollectionNames().forEach(System.out::println);
 		return Response.ok("shira method doGet invoked " + s + ", " + new Date()).build();
 	}
