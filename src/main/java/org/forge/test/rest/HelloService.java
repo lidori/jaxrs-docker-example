@@ -29,7 +29,10 @@ public class HelloService {
 		String s = mongoClient.getDatabaseNames().get(1);
 		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
 		if (database != null) {
-			database.createCollection("customers");
+			MongoCollection collection = database.getCollection("customers");
+			if (collection == null) {
+			         database.createCollection("customers");
+			}
 			for (String name : database.listCollectionNames()) {
 				System.out.println(name);
 			}
