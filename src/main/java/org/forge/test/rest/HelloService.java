@@ -12,6 +12,6 @@ public class HelloService {
 	@GET
 	@Produces("text/plain")
 	public Response doGet() {
-		return Response.ok("method doGet invoked " + new Date()).build();
+		return Response.ok("shira method doGet invoked " + new Date()).build();
 	}
 }
