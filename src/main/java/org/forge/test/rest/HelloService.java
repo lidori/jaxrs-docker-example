@@ -20,7 +20,8 @@ public class HelloService {
 	@Produces("text/plain")
 	public Response doGet() {
 		MongoClient mongoClient = new MongoClient("172.30.47.7", 27017);
-		boolean auth = mongoClient.getDB("vachubdb").authenticate("admin", "shiraadmin".toCharArray());
-		return Response.ok("shira method doGet invoked " + auth + ", " + new Date()).build();
+		mongoClient.getDatabaseNames().forEach(System.out::println);
+		String s = mongoClient.getDatabaseNames().get(0);
+		return Response.ok("shira method doGet invoked " + s + ", " + new Date()).build();
 	}
 }
