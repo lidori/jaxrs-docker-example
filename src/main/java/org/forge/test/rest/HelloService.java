@@ -32,6 +32,8 @@ public class HelloService {
 			MongoCollection collection = database.getCollection("customers");
 			if (collection == null) {
 			         database.createCollection("customers");
+			} else {
+                              System.out.println("collection already exist!!!");
 			}
 			for (String name : database.listCollectionNames()) {
 				System.out.println(name);
