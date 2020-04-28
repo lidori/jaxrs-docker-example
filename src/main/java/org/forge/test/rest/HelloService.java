@@ -13,9 +13,8 @@ import com.mongodb.MongoCredential;
 import com.mongodb.MongoClientOptions;
 import java.util.Arrays;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 @Path("/greet")
 public class HelloService {
@@ -27,7 +26,7 @@ public class HelloService {
 		MongoClient mongoClient = new MongoClient(uri);
 		mongoClient.getDatabaseNames().forEach(System.out::println);
 		String s = mongoClient.getDatabaseNames().get(1);
-		DB database = mongoClient.getDatabase("myMongoDb");
+		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
 		database.createCollection("customers", null);
 		database.getCollectionNames().forEach(System.out::println);
 		return Response.ok("shira method doGet invoked " + s + ", " + new Date()).build();
