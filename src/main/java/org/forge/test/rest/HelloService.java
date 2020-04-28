@@ -27,11 +27,15 @@ public class HelloService {
 		mongoClient.getDatabaseNames().forEach(System.out::println);
 		String s = mongoClient.getDatabaseNames().get(0);
 		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
-		System.out.println("database is " + database);
-		database.createCollection("customers");
-		for (String name : database.listCollectionNames()) {
-			System.out.println(name);
+		if (database != null) {
+			database.createCollection("customers");
+			for (String name : database.listCollectionNames()) {
+				System.out.println(name);
+			}
+		} else {
+			System.out.println("database is null!!!");
 		}
+		
 		return Response.ok("shira 1 method doGet invoked " + s + ", " + new Date()).build();
 	}
 }
