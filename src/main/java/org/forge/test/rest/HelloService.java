@@ -28,7 +28,7 @@ public class HelloService {
 		String s = mongoClient.getDatabaseNames().get(1);
 		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
 		database.createCollection("customers", null);
-		database.getCollectionNames().forEach(System.out::println);
+		database.listCollectionNames().forEach(System.out::println);
 		return Response.ok("shira method doGet invoked " + s + ", " + new Date()).build();
 	}
 }
