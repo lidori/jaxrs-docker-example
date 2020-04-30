@@ -54,6 +54,7 @@ public class HelloService {
 			System.out.println("database is null!!!");
 			return Response.status(Response.Status.BAD_REQUEST).entity("No users db").build();
 		}
+		System.out.println("Something is wrong!!!");
 		return Response.status(Response.Status.BAD_REQUEST).entity("Something is wrong").build();
 	}
 	
