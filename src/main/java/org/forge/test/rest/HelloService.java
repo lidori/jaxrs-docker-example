@@ -46,7 +46,7 @@ public class HelloService {
 		}
 
 		//return Response.ok("shira 3 method doGet invoked " + s + ", " + new Date()).build();
-		return Response.status(Status.BAD_REQUEST).entity("No users").build();
+		return Response.status(Response.Status.BAD_REQUEST).entity("No users").build();
 	}
 	
 	@POST
