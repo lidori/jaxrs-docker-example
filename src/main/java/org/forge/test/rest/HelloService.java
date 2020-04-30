@@ -73,8 +73,7 @@ public class HelloService {
                               System.out.println("collection users already exist!!!");
 			}
 			
-			Document existingDocument = collection.findOne(eq("id", user.id));
-			if (existingDocument == null) {
+			if (collection.find(eq("id", user.id)) == null) {
 				Document document = new Document("id", user.id)
 				.append("username", user.username)
 				.append("image", user.image);
