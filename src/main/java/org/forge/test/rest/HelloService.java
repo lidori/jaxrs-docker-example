@@ -37,9 +37,7 @@ public class HelloService {
 			if (collection == null) {
 			         System.out.println("collection users does not exist!!!");
 			} else {
-                             Response.ok().type("application/json").entity(StreamSupport.stream(collection.find().spliterator(), false)
-        			.map(Document::toJson)
-        			.collect(Collectors.joining(", ", "[", "]"))).build();
+                             Response.ok().type("application/json").entity(collection.find()).build();
 			}
 		} else {
 			System.out.println("database is null!!!");
