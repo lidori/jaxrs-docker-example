@@ -44,7 +44,7 @@ public class HelloService {
 					
 			} else {
 				System.out.println("collection users exist!!! find " + collection.find());
-				MongoCursor<Document> cursor = results.iterator();
+				MongoCursor<Document> cursor = collection.find().iterator();
 				List<String> list = new ArrayList<String>(); 
 				while(cursor.hasNext())
     					list.add(cursor.next().toJson());
