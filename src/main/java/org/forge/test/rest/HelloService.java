@@ -20,41 +20,33 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import static com.mongodb.client.model.Filters.eq;
 
+import java.util.stream.StreamSupport;
+import java.util.stream.Collectors;
+
 @Path("/greet")
 public class HelloService {
 
 	@GET
-	@Produces("text/plain")
+	@Produces("application/json")
 	public Response doGet() {
 		MongoClientURI uri = new MongoClientURI("mongodb://admin:shiraadmin@172.30.47.7:27017");
 		MongoClient mongoClient = new MongoClient(uri);
-		System.out.println("hello!!!3");
-		mongoClient.getDatabaseNames().forEach(System.out::println);
-		String s = mongoClient.getDatabaseNames().get(1);
 		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
 		if (database != null) {
-			MongoCollection collection = database.getCollection("customers");
+			MongoCollection collection = database.getCollection("users");
 			if (collection == null) {
-			         database.createCollection("customers");
+			         System.out.println("collection users does not exist!!!");
 			} else {
-                              System.out.println("collection already exist!!!");
+                             Response.ok().type("application/json").entity(StreamSupport.stream(collection.find().spliterator(), false)
+        			.map(Document::toJson)
+        			.collect(Collectors.joining(", ", "[", "]"))).build();
 			}
-			for (String name : database.listCollectionNames()) {
-				System.out.println(name);
-			}
-			Document document = new Document("title", "MongoDB")
-			.append("description", "database")
-			.append("likes", 100)
-			.append("url", "http://www.tutorialspoint.com/mongodb/")
-			.append("by", "tutorials point");
-
-			//Inserting document into the collection
-			collection.insertOne(document);
-			System.out.println("Document inserted successfully");
 		} else {
 			System.out.println("database is null!!!");
 		}
-		return Response.ok("shira 3 method doGet invoked " + s + ", " + new Date()).build();
+
+		//return Response.ok("shira 3 method doGet invoked " + s + ", " + new Date()).build();
+		return Response.status(Status.BAD_REQUEST).entity("No users").build();
 	}
 	
 	@POST
