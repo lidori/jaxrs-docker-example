@@ -38,6 +38,15 @@ public class HelloService {
 			for (String name : database.listCollectionNames()) {
 				System.out.println(name);
 			}
+			Document document = new Document("title", "MongoDB")
+			.append("description", "database")
+			.append("likes", 100)
+			.append("url", "http://www.tutorialspoint.com/mongodb/")
+			.append("by", "tutorials point");
+
+			//Inserting document into the collection
+			collection.insertOne(document);
+			System.out.println("Document inserted successfully");
 		} else {
 			System.out.println("database is null!!!");
 		}
