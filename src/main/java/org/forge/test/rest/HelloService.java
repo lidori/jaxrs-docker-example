@@ -15,6 +15,7 @@ import java.util.Arrays;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 @Path("/greet")
 public class HelloService {
