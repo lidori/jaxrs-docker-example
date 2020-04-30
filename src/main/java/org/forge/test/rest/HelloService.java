@@ -46,6 +46,10 @@ public class HelloService {
 				List<String> list = new ArrayList<String>(); 
 				while(cursor.hasNext())
     					list.add(cursor.next().toJson());
+				//can try this too instead of list in entity:
+				//StreamSupport.stream(collection.find().spliterator(), false)
+        			//.map(Document::toJson)
+        			//.collect(Collectors.joining(", ", "[", "]"))
                              	return Response.ok().type("application/json").entity(list).build();
 			}
 		} else {
