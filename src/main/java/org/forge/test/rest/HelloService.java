@@ -53,4 +53,11 @@ public class HelloService {
 		}
 		return Response.ok("shira 3 method doGet invoked " + s + ", " + new Date()).build();
 	}
+	
+	@POST
+	@Consumes("application/json")
+	@Produces("text/plain")
+	public Response createUser(User user) {
+		return Response.ok("post " + user.username).build();
+	}
 }
