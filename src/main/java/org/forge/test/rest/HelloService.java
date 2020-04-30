@@ -60,6 +60,33 @@ public class HelloService {
 	@Consumes("application/json")
 	@Produces("text/plain")
 	public Response createUser(User user) {
-		return Response.ok("post " + user.username).build();
+		MongoClientURI uri = new MongoClientURI("mongodb://admin:shiraadmin@172.30.47.7:27017");
+		MongoClient mongoClient = new MongoClient(uri);
+		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
+		if (database != null) {
+			MongoCollection collection = database.getCollection("users");
+			if (collection == null) {
+			        database.createCollection("users");
+				collection = database.getCollection("users");
+			} else {
+                              System.out.println("collection users already exist!!!");
+			}
+			
+			Document existingDocument = collection.findOne(eq("id", user.id));
+			if (existingDocument == null) {
+				Document document = new Document("id", user.id)
+				.append("username", user.username)
+				.append("image", user.image);
+
+				//Inserting document into the collection
+				collection.insertOne(document);
+				System.out.println("Document inserted successfully");
+			} else {
+				System.out.println("User already exists, document not inserted!!!");
+			}
+		} else {
+			System.out.println("database is null!!!");
+		}
+		return Response.ok("handled user " + user.username).build();
 	}
 }
