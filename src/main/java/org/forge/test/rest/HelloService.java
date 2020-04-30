@@ -35,17 +35,17 @@ public class HelloService {
 		if (database != null) {
 			MongoCollection collection = database.getCollection("users");
 			if (collection == null) {
-			         System.out.println("collection users does not exist!!!");
+			        System.out.println("collection users does not exist!!!");
+				return Response.status(Response.Status.BAD_REQUEST).entity("No users").build();
+					
 			} else {
 				System.out.println("collection users exist!!! find " + collection.find());
                              	Response.ok().type("application/json").entity(collection.find()).build();
 			}
 		} else {
 			System.out.println("database is null!!!");
+			return Response.status(Response.Status.BAD_REQUEST).entity("No users").build();
 		}
-
-		System.out.println("bad req!!!");
-		return Response.status(Response.Status.BAD_REQUEST).entity("No users").build();
 	}
 	
 	@POST
