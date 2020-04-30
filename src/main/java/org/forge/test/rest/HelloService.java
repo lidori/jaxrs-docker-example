@@ -19,9 +19,13 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import static com.mongodb.client.model.Filters.eq;
+import com.mongodb.client.MongoCursor;
 
 import java.util.stream.StreamSupport;
 import java.util.stream.Collectors;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/greet")
 public class HelloService {
@@ -40,7 +44,11 @@ public class HelloService {
 					
 			} else {
 				System.out.println("collection users exist!!! find " + collection.find());
-                             	Response.ok().type("application/json").entity(collection.find()).build();
+				MongoCursor<Document> cursor = results.iterator();
+				List<String> list = new ArrayList<String>(); 
+				while(cursor.hasNext())
+    					list.add(cursor.next().toJson());
+                             	Response.ok().type("application/json").entity(list).build();
 			}
 		} else {
 			System.out.println("database is null!!!");
