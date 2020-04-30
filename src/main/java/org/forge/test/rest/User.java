@@ -1,6 +1,6 @@
 package org.forge.test.rest;
 
-public class Product {
+public class User {
 
   String id; // email
 	String username;
