@@ -18,6 +18,7 @@ import java.util.Arrays;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import static com.mongodb.client.model.Filters.eq;
 
 @Path("/greet")
 public class HelloService {
