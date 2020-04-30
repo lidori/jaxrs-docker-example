@@ -40,19 +40,16 @@ public class HelloService {
 			MongoCollection collection = database.getCollection("users");
 			if (collection == null) {
 			        System.out.println("collection users does not exist!!!");
-				return Response.status(Response.Status.BAD_REQUEST).entity("No users collection").build();
-					
 			} else {
 				System.out.println("collection users exist!!! find " + collection.find());
 				MongoCursor<Document> cursor = collection.find().iterator();
 				List<String> list = new ArrayList<String>(); 
 				while(cursor.hasNext())
     					list.add(cursor.next().toJson());
-                             	Response.ok().type("application/json").entity(list).build();
+                             	return Response.ok().type("application/json").entity(list).build();
 			}
 		} else {
 			System.out.println("database is null!!!");
-			return Response.status(Response.Status.BAD_REQUEST).entity("No users db").build();
 		}
 		System.out.println("Something is wrong!!!");
 		return Response.status(Response.Status.BAD_REQUEST).entity("Something is wrong").build();
