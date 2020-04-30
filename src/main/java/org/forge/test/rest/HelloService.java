@@ -37,13 +37,14 @@ public class HelloService {
 			if (collection == null) {
 			         System.out.println("collection users does not exist!!!");
 			} else {
-                             Response.ok().type("application/json").entity(collection.find()).build();
+				System.out.println("collection users exist!!! find " + collection.find());
+                             	Response.ok().type("application/json").entity(collection.find()).build();
 			}
 		} else {
 			System.out.println("database is null!!!");
 		}
 
-		//return Response.ok("shira 3 method doGet invoked " + s + ", " + new Date()).build();
+		System.out.println("bad req!!!");
 		return Response.status(Response.Status.BAD_REQUEST).entity("No users").build();
 	}
 	
