@@ -70,7 +70,7 @@ public class VacationService {
         			System.out.println("collection vacations already exist!!!");
 			}
 			
-			if (collection.find(eq("id", user.id)).first() == null) {
+			if (collection.find(eq("id", vacation.id)).first() == null) {
 				Document document = new Document("id", vacation.id)
 				.append("title", vacation.title)
 				.append("description", vacation.description)
