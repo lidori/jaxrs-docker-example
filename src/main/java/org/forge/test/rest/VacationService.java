@@ -45,7 +45,7 @@ public class VacationService {
 				List<String> list = new ArrayList<String>(); 
 				while(cursor.hasNext())
     					list.add(cursor.next().toJson());
-        return Response.ok().type("application/json").entity(list).build();
+        			return Response.ok().type("application/json").entity(list).build();
 			}
 		} else {
 			System.out.println("database is null!!!");
@@ -67,14 +67,14 @@ public class VacationService {
 			  database.createCollection("vacations");
 				collection = database.getCollection("vacations");
 			} else {
-        System.out.println("collection vacations already exist!!!");
+        			System.out.println("collection vacations already exist!!!");
 			}
 			
 			if (collection.find(eq("id", user.id)).first() == null) {
 				Document document = new Document("id", vacation.id)
 				.append("title", vacation.title)
-				.append("description", vacation.description),
-        .append("type", vacation.type);
+				.append("description", vacation.description)
+        			.append("type", vacation.type);
 
 				//Inserting document into the collection
 				collection.insertOne(document);
