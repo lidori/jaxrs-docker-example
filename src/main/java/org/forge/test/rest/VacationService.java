@@ -79,8 +79,8 @@ public class VacationService {
 				collection.insertOne(document);
 				System.out.println("Document inserted successfully");
 			} else {
-				System.out.println(collection.replaceOne(eq("id", vacation.id), document));
-				System.out.println("Vacation already exists, updating!!!" + vacation.description);
+				System.out.println("hello!" + collection.replaceOne(eq("id", vacation.id), document));
+				System.out.println("Vacation already exists, updating1!!!" + vacation.description);
 			}
 		} else {
 			System.out.println("database is null!!!");
