@@ -20,6 +20,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.BasicDBObject;
 
 import java.util.stream.StreamSupport;
 import java.util.stream.Collectors;
@@ -70,17 +71,18 @@ public class VacationService {
         			System.out.println("collection vacations already exist!!!");
 			}
 			
-			if (collection.find(eq("id", vacation.id)).first() == null) {
-				Document document = new Document("id", vacation.id)
+			Document document = new Document("id", vacation.id)
 				.append("title", vacation.title)
 				.append("description", vacation.description)
         			.append("type", vacation.type);
-
+			if (collection.find(eq("id", vacation.id)).first() == null) {
 				//Inserting document into the collection
 				collection.insertOne(document);
 				System.out.println("Document inserted successfully");
 			} else {
-				System.out.println("Vacation already exists, document not inserted!!!");
+				BasicDBObject searchQuery = new BasicDBObject().append("id", vacation.id);
+				collection.update(searchQuery, document);
+				System.out.println("Vacation already exists, updating!!!");
 			}
 		} else {
 			System.out.println("database is null!!!");
