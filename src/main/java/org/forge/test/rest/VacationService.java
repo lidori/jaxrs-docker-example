@@ -80,7 +80,7 @@ public class VacationService {
 				System.out.println("Document inserted successfully");
 			} else {
 				collection.replaceOne(eq("id", "vacation.id"), document);
-				System.out.println("Vacation already exists, updating!!!");
+				System.out.println("Vacation already exists, updating!!!" + vacation.description);
 			}
 		} else {
 			System.out.println("database is null!!!");
