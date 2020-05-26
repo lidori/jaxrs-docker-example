@@ -107,7 +107,7 @@ public class VacationService {
 			if (collection.find(eq("id", vacation.id)).first() == null) {
 				System.out.println("Vacation does not exist");
 			} else {
-				collection.deleteOne(eq("id", vacation.id), document);
+				collection.deleteOne(eq("id", vacation.id));
 				System.out.println("Vacation deleted!!!");
 			}
 		} else {
