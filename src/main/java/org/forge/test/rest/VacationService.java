@@ -87,4 +87,32 @@ public class VacationService {
 		}
 		return Response.ok("handled vacation " + vacation.title).build();
 	}
+	
+	@DELETE
+	@Consumes("application/json")
+	@Produces("text/plain")
+	public Response deleteVacation(Vacation vacation) {
+		MongoClientURI uri = new MongoClientURI("mongodb://admin:shiraadmin@172.30.47.7:27017");
+		MongoClient mongoClient = new MongoClient(uri);
+		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
+		if (database != null) {
+			MongoCollection collection = database.getCollection("vacations");
+			if (collection == null) {
+			  database.createCollection("vacations");
+				collection = database.getCollection("vacations");
+			} else {
+        			System.out.println("collection vacations already exist!!!");
+			}
+			
+			if (collection.find(eq("id", vacation.id)).first() == null) {
+				System.out.println("Vacation does not exist");
+			} else {
+				collection.deleteOne(eq("id", vacation.id), document);
+				System.out.println("Vacation deleted!!!");
+			}
+		} else {
+			System.out.println("database is null!!!");
+		}
+		return Response.ok("handled vacation " + vacation.title).build();
+	}
 }
