@@ -90,9 +90,9 @@ public class VacationService {
 	}
 	
 	@DELETE
-	@Consumes("application/json")
+	@Path("{id}")
 	@Produces("text/plain")
-	public Response deleteVacation(Vacation vacation) {
+	public Response deleteVacation(@PathParam("id") String vacationId) {
 		MongoClientURI uri = new MongoClientURI("mongodb://admin:shiraadmin@172.30.47.7:27017");
 		MongoClient mongoClient = new MongoClient(uri);
 		MongoDatabase database = mongoClient.getDatabase("myMongoDb");
@@ -105,7 +105,7 @@ public class VacationService {
         			System.out.println("collection vacations already exist!!!");
 			}
 			
-			if (collection.find(eq("id", vacation.id)).first() == null) {
+			if (collection.find(eq("id", vacationId)).first() == null) {
 				System.out.println("Vacation does not exist");
 			} else {
 				collection.deleteOne(eq("id", vacation.id));
